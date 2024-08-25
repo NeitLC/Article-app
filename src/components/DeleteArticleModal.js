@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteArticle } from "./articlesSlice";
+import { deleteArticle } from "../redux/articleSlice";
 import Modal from "react-modal";
 
 export default function DeleteArticleModal() {

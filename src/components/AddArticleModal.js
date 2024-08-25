@@ -5,19 +5,27 @@ import Modal from "react-modal";
 
 export default function AddArticleModal() {
   const dispatch = useDispatch();
+  const [articles, setArticles] = useState([]);
   const [body, setBody] = useState("");
   const [tags, setTags] = useState("");
   const [rate, setRate] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = () => {
-    const article = {
+    const newArticle = {
       type: "add",
       body,
-      tags: tags.split(",").map((tag) => tag.trim),
+      tags: tags.split(",").map((tag) => tag.trim()),
       rate,
     };
-    dispatch(addArticle(article));
+  
+    // Сохранение артикля в localStorage
+    const articles = JSON.parse(localStorage.getItem("articles")) || [];
+    articles.push(newArticle);
+    localStorage.setItem("articles", JSON.stringify(articles));
+  
+    setArticles([...articles, newArticle]);
+    dispatch(addArticle(newArticle));
     setBody("");
     setTags("");
     setRate(1);

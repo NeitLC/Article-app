@@ -2,6 +2,7 @@ import React from "react";
 import Tag from "./Tag";
 import Rating from "./Rating";
 import { Row, Col, Card, Image } from 'react-bootstrap';
+import DeleteArticleModal from './DeleteArticleModal';
 
 export default function Article({title, text, image, tags, rating}) {
     return(

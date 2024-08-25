@@ -1,0 +1,16 @@
+[
+    {
+      "title": "Article 1",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque blandit erat eu velit convallis, eget gravida turpis semper. Sed sit amet aliquam leo. Aenean vel consequat felis, a pharetra metus.\nIn volutpat in enim id vestibulum. Nunc vel ante pretium, euismod elit non, sodales ante. Curabitur pellentesque, risus auctor varius convallis, magna risus varius mi, ut pretium arcu mi id turpis. Cras tempus sit amet ante sed mollis.\nPellentesque placerat nisl id magna sollicitudin volutpat. Morbi suscipit non nibh a accumsan. Vestibulum porttitor ante in odio vehicula lobortis. Nulla lacus orci, dapibus non tellus eu, mollis luctus metus. In vitae congue elit.\nDuis diam leo, varius ac feugiat ac, dictum quis nisi. Nullam blandit dictum facilisis. Proin tincidunt turpis in ipsum rhoncus porta. Vivamus quis tellus accumsan, sollicitudin est sit amet, dapibus diam. Ut commodo dolor ac nunc luctus, ac viverra est placerat.\nFusce consectetur lacinia rhoncus. Vivamus sed nunc quis massa gravida pulvinar. Donec non turpis quis tortor sodales tincidunt eget vel velit. Nulla blandit, lacus ac suscipit porttitor, est tortor dapibus erat, non euismod metus neque vel quam.\nNunc vulputate porttitor erat nec luctus.",
+      "image": "article1",
+      "tags": ["tag1", "tag2", "tag3", "tag4"],
+      "rating": 4
+    },
+    {
+      "title": "Article 2",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque blandit erat eu velit convallis, eget gravida turpis semper. Sed sit amet aliquam leo. Aenean vel consequat felis, a pharetra metus.\nIn volutpat in enim id vestibulum. Nunc vel ante pretium, euismod elit non, sodales ante. Curabitur pellentesque, risus auctor varius convallis, magna risus varius mi, ut pretium arcu mi id turpis. Cras tempus sit amet ante sed mollis.\nPellentesque placerat nisl id magna sollicitudin volutpat. Morbi suscipit non nibh a accumsan. Vestibulum porttitor ante in odio vehicula lobortis. Nulla lacus orci, dapibus non tellus eu, mollis luctus metus. In vitae congue elit.\nDuis diam leo, varius ac feugiat ac, dictum quis nisi. Nullam blandit dictum facilisis. Proin tincidunt turpis in ipsum rhoncus porta. Vivamus quis tellus accumsan, sollicitudin est sit amet, dapibus diam. Ut commodo dolor ac nunc luctus, ac viverra est placerat.\nFusce consectetur lacinia rhoncus. Vivamus sed nunc quis massa gravida pulvinar. Donec non turpis quis tortor sodales tincidunt eget vel velit. Nulla blandit, lacus ac suscipit porttitor, est tortor dapibus erat, non euismod metus neque vel quam.\nNunc vulputate porttitor erat nec luctus.",
+      "image": "article2",
+      "tags": ["tag1", "tag2", "tag3", "tag4"],
+      "rating": 5
+    }
+  ]
