@@ -12,7 +12,7 @@ export default function Main() {
                 <Row>
                     <Col md={8}>
                         <ArticleList />
-                        <AddArticleModal />
+                        {/* <AddArticleModal onAddArticle={handleAddArticle}/> */}
                         <DeleteArticleModal />
                     </Col>
                     <Col md={4}>

@@ -3,33 +3,37 @@ import { useDispatch } from "react-redux";
 import { addArticle } from "../redux/articleSlice";
 import Modal from "react-modal";
 
-export default function AddArticleModal() {
+export default function AddArticleModal({ onAddArticle }) {
   const dispatch = useDispatch();
-  const [articles, setArticles] = useState([]);
+  const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tags, setTags] = useState("");
   const [rate, setRate] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = () => {
+    const existingArticles = JSON.parse(localStorage.getItem("articles")) || [];
     const newArticle = {
+      id: existingArticles.length + 1,
       type: "add",
+      title,
       body,
       tags: tags.split(",").map((tag) => tag.trim()),
       rate,
     };
-  
-    // Сохранение артикля в localStorage
-    const articles = JSON.parse(localStorage.getItem("articles")) || [];
-    articles.push(newArticle);
-    localStorage.setItem("articles", JSON.stringify(articles));
-  
-    setArticles([...articles, newArticle]);
-    dispatch(addArticle(newArticle));
+
+    const updatedArticles = [...existingArticles, newArticle];
+    localStorage.setItem("articles", JSON.stringify(updatedArticles));
+    
+    setTitle("");
     setBody("");
     setTags("");
     setRate(1);
+    dispatch(addArticle(newArticle));
     setIsModalOpen(false);
+
+    // Вызываем функцию обратного вызова для обновления списка статей
+    onAddArticle(newArticle);
   };
 
   const toggleModal = () => {
@@ -45,6 +49,12 @@ export default function AddArticleModal() {
         contentLabel="Add Article Modal"
       >
         <h3>Add Article</h3>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Article title"
+        />
         <input
           type="text"
           value={body}
