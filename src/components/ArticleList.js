@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Article from "./Article";
-import articles from './articles.json';
+import articles from '../data/articles.json';
 import AddArticleModal from "./AddArticleModal";
+import DeleteArticleModal from "./DeleteArticleModal";
+import { Row, Col } from 'react-bootstrap';
 
 export default function ArticleList() {
   const [data, setData] = useState([]);
@@ -9,8 +11,6 @@ export default function ArticleList() {
   useEffect(() => {
     let storedArticles = JSON.parse(localStorage.getItem('articles')) || [];
 
-    // Если в localStorage нет статей, загружаем их из articles.json
-    // и генерируем новые идентификаторы
     if (storedArticles.length === 0) {
       storedArticles = articles.map((article, index) => ({
         ...article,
@@ -19,19 +19,32 @@ export default function ArticleList() {
       localStorage.setItem('articles', JSON.stringify(storedArticles));
     }
 
-    setData(storedArticles);
+    setData(storedArticles.reverse());
   }, []);
 
   const handleAddArticle = (newArticle) => {
-    setData([...data, newArticle]);
+    setData([newArticle, ...data]);
+  };
+
+  const handleDeleteArticle = (id) => {
+    const updatedArticles = data.filter((article) => article.id !== id);
+    setData(updatedArticles);
+    localStorage.setItem('articles', JSON.stringify(updatedArticles));
   };
 
   return (
     <div>
-      <AddArticleModal onAddArticle={handleAddArticle} />
       {data.map((article) => (
         <Article key={article.id} {...article} />
       ))}
+      <Row>
+        <Col>
+          <AddArticleModal onAddArticle={handleAddArticle} />
+        </Col>
+        <Col>
+          <DeleteArticleModal onDeleteArticle={handleDeleteArticle} />
+        </Col>
+      </Row>
     </div>
   );
 }

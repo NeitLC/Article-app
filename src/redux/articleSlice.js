@@ -1,9 +1,11 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 
+const WebSocketUrl = process.env.WEBSOCKET_URL;
+
 export const fetchWebSocketData = createAsyncThunk(
     'articles/fetchWebSocketData',
     async() => {
-        const socket = new WebSocket('wss://ws.postman-echo.com/raw');
+        const socket = new WebSocket(WebSocketUrl);
         const data = await new Promise((resolve, reject) => {
           socket.onopen = () => {
               console.log('WebSocket connection established');
@@ -26,7 +28,7 @@ export const fetchWebSocketData = createAsyncThunk(
 export const addArticle = createAsyncThunk(
     'article/addArticle',
     async(article) => {
-        const socket = new WebSocket('wss://ws.postman-echo.com/raw');
+        const socket = new WebSocket(WebSocketUrl);
         const data = await new Promise((resolve, reject) => {
           socket.onopen = () => {
             socket.send(JSON.stringify(article));
@@ -49,7 +51,7 @@ export const addArticle = createAsyncThunk(
 export const deleteArticle = createAsyncThunk(
     'articles/deleteArticle',
     async (id) => {
-      const socket = new WebSocket('wss://ws.postman-echo.com/raw');
+      const socket = new WebSocket(WebSocketUrl);
       const data = await new Promise((resolve, reject) => {
         socket.onopen = () => {
           socket.send(JSON.stringify({ type: 'del', id }));

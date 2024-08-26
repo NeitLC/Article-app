@@ -2,14 +2,13 @@ import React from "react";
 import Tag from "./Tag";
 import Rating from "./Rating";
 import { Row, Col, Card, Image } from 'react-bootstrap';
-import DeleteArticleModal from './DeleteArticleModal';
 
-export default function Article({title, text, image, tags, rating}) {
+export default function Article({title, body, image, tags, rate}) {
     return(
         <Card className="mb-3">
             <Card.Body>
             <Card.Title>{title}</Card.Title>
-            <Card.Text>{text}</Card.Text>
+            <Card.Text>{body}</Card.Text>
             <Image src={image} alt={title} fluid />
             <Row className="mt-3">
                 <Col xs={8}>
@@ -21,7 +20,7 @@ export default function Article({title, text, image, tags, rating}) {
                     </div>
                 </Col>
                 <Col xs={4}>
-                    <Rating rating={rating} />
+                    <Rating rate={rate} />
                 </Col>
             </Row>
             </Card.Body>

@@ -11,7 +11,6 @@ export default function LoginForm() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
-    const {token, user} = useSelector(state => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -42,7 +41,6 @@ export default function LoginForm() {
             
             navigate('/');
         } catch (error) {
-            // Исправленное обращение к свойству 
             setError(error.response.data.message || 'Ошибка аутентификации');
             setShowModal(true);
         }

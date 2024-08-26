@@ -2,7 +2,6 @@ import React from "react";
 import ArticleList from "./ArticleList";
 import Sidebar from "./Sidebar";
 import { Container, Row, Col } from 'react-bootstrap';
-import AddArticleModal from "./AddArticleModal";
 import DeleteArticleModal from "./DeleteArticleModal";
 
 export default function Main() {
@@ -12,8 +11,6 @@ export default function Main() {
                 <Row>
                     <Col md={8}>
                         <ArticleList />
-                        {/* <AddArticleModal onAddArticle={handleAddArticle}/> */}
-                        <DeleteArticleModal />
                     </Col>
                     <Col md={4}>
                         <Sidebar />
