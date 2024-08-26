@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteArticle } from "../redux/articleSlice";
 import { Form, Button, Modal } from "react-bootstrap";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function DeleteArticleModal({ onDeleteArticle }) {
   const dispatch = useDispatch();
   const [id, setId] = useState("");
+  const [toastId, setToastId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = () => {
@@ -19,14 +22,37 @@ export default function DeleteArticleModal({ onDeleteArticle }) {
     
     // Вызываем функцию обратного вызова для обновления списка статей
     onDeleteArticle(Number(id));
+
+    const newToastId = toast.success('Article deleted successfully!', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      onClose: () => {
+        // Clear the toastId state variable
+        setToastId(null);
+      },
+    });
+    setToastId(newToastId);
   };
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const closeToast = () => {
+    if (toastId !== null) {
+      toast.dismiss(toastId);
+    }
+  };
+
   return (
     <div>
+      <ToastContainer />
       <Button variant="danger" onClick={toggleModal}>
         Delete Article
       </Button>

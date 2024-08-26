@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Alert, Card, Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { login, loadTokenFromLocalStorage } from '../redux/authSlice';
 import axiosService from "../axios/axiosService";
@@ -38,7 +40,18 @@ export default function LoginForm() {
             localStorage.setItem('token', response.data.access_token); 
             localStorage.setItem('email', email);
             dispatch(login({ token: response.data.access_token, email: email }));
-            
+
+            toast.success('Вы успешно авторизовались!', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored',
+            });
+
             navigate('/');
         } catch (error) {
             setError(error.response.data.message || 'Ошибка аутентификации');
@@ -50,6 +63,7 @@ export default function LoginForm() {
 
     return (
         <Container className="mt-5">
+            <ToastContainer />
             <Row className="justify-content-center">
                 <Col md={6}>
                     <Card className="shadow-sm">

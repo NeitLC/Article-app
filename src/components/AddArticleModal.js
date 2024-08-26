@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addArticle } from "../redux/articleSlice";
 import { Form, Button, Modal } from "react-bootstrap";
-// import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function AddArticleModal({ onAddArticle }) {
   const dispatch = useDispatch();
@@ -11,6 +11,7 @@ export default function AddArticleModal({ onAddArticle }) {
   const [body, setBody] = useState("");
   const [tags, setTags] = useState("");
   const [rate, setRate] = useState(1);
+  const [toastId, setToastId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = () => {
@@ -37,25 +38,36 @@ export default function AddArticleModal({ onAddArticle }) {
     // Вызываем функцию обратного вызова для обновления списка статей
     onAddArticle(newArticle);
 
-    // toast.success('Article added successfully!', {
-    //   position: "top-right",
-    //   autoClose: 3000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "colored",
-    // });
+    const newToastId = toast.success('Article added successfully!', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      onClose: () => {
+        // Clear the toastId state variable
+        setToastId(null);
+      },
+    });
+    setToastId(newToastId);
   };
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const closeToast = () => {
+    if (toastId !== null) {
+      toast.dismiss(toastId);
+    }
+  };
+
   return (
     <div>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
       <Button variant="primary" onClick={toggleModal}>
         Add Article
       </Button>
