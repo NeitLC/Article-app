@@ -17,18 +17,14 @@ export default function DeleteArticleModal({ articles, onDeleteArticle }) {
   };
 
   const handleSubmit = () => {
-    // Обновление статей в localStorage
     const existingArticles = JSON.parse(localStorage.getItem("articles")) || [];
-    const updatedArticles = existingArticles.filter(
-      (article) => !selectedArticles.includes(article.id)
-    );
+    const updatedArticles = existingArticles.filter((article) => !selectedArticles.includes(article.id));
     localStorage.setItem("articles", JSON.stringify(updatedArticles));
-
-    // Удаление выбранных статей из Redux
+    
     dispatch(deleteArticle(selectedArticles));
     setSelectedArticles([]);
     setIsModalOpen(false);
-    onDeleteArticle(selectedArticles);
+    onDeleteArticle(updatedArticles);
   };
 
   const handleShow = () => setIsModalOpen(true);

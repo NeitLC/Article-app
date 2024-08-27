@@ -26,10 +26,8 @@ export default function ArticleList() {
     setData([newArticle, ...data]);
   };
 
-  const handleDeleteArticle = (id) => {
-    const updatedArticles = data.filter((article) => article.id !== id);
+  const handleDeleteArticle = (updatedArticles) => {
     setData(updatedArticles);
-    localStorage.setItem('articles', JSON.stringify(updatedArticles));
   };
 
   return (
