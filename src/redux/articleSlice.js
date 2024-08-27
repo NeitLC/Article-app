@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 
-const WebSocketUrl = process.env.WEBSOCKET_URL;
+const WebSocketUrl = process.env.REACT_APP_WEBSOCKET_URL;
 
 export const fetchWebSocketData = createAsyncThunk(
     'articles/fetchWebSocketData',

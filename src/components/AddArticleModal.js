@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addArticle } from "../redux/articleSlice";
 import { Form, Button, Modal } from "react-bootstrap";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function AddArticleModal({ onAddArticle }) {
@@ -11,8 +11,21 @@ export default function AddArticleModal({ onAddArticle }) {
   const [body, setBody] = useState("");
   const [tags, setTags] = useState("");
   const [rate, setRate] = useState(1);
-  const [toastId, setToastId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const notify = () => {
+    toast.success('Article added successfully!', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+    });
+  };
 
   const handleSubmit = () => {
     const existingArticles = JSON.parse(localStorage.getItem("articles")) || [];
@@ -37,42 +50,19 @@ export default function AddArticleModal({ onAddArticle }) {
 
     // Вызываем функцию обратного вызова для обновления списка статей
     onAddArticle(newArticle);
-
-    const newToastId = toast.success('Article added successfully!', {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      onClose: () => {
-        // Clear the toastId state variable
-        setToastId(null);
-      },
-    });
-    setToastId(newToastId);
+    notify();
   };
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  const closeToast = () => {
-    if (toastId !== null) {
-      toast.dismiss(toastId);
-    }
-  };
+  const handleShow = () => setIsModalOpen(true);
+  const handleClose = () => setIsModalOpen(false);
 
   return (
     <div>
-      <ToastContainer />
-      <Button variant="primary" onClick={toggleModal}>
+      <Button variant="primary" onClick={handleShow}>
         Add Article
       </Button>
 
-      <Modal show={isModalOpen} onHide={toggleModal}>
+      <Modal show={isModalOpen} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add Article</Modal.Title>
         </Modal.Header>
@@ -119,7 +109,7 @@ export default function AddArticleModal({ onAddArticle }) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={toggleModal}>
+          <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
