@@ -3,17 +3,10 @@ import { useDispatch } from "react-redux";
 import { deleteArticle } from "../redux/articleSlice";
 import { Form, Button, Modal, ListGroup } from "react-bootstrap";
 
-export default function DeleteArticleModal({ onDeleteArticle }) {
+export default function DeleteArticleModal({ articles, onDeleteArticle }) {
   const dispatch = useDispatch();
   const [selectedArticles, setSelectedArticles] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [articles, setArticles] = useState([]);
-
-  useEffect(() => {
-    // Загрузка статей из localStorage
-    const existingArticles = JSON.parse(localStorage.getItem("articles")) || [];
-    setArticles(existingArticles);
-  }, []);
 
   const handleArticleSelect = (articleId) => {
     if (selectedArticles.includes(articleId)) {
@@ -33,7 +26,6 @@ export default function DeleteArticleModal({ onDeleteArticle }) {
 
     // Удаление выбранных статей из Redux
     dispatch(deleteArticle(selectedArticles));
-    console.log(selectedArticles);
     setSelectedArticles([]);
     setIsModalOpen(false);
     onDeleteArticle(selectedArticles);

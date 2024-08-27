@@ -22,7 +22,7 @@ export default function AddArticleModal({ onAddArticle }) {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
+      theme: "dark",
       transition: Bounce,
     });
   };
@@ -53,16 +53,17 @@ export default function AddArticleModal({ onAddArticle }) {
     notify();
   };
 
-  const handleShow = () => setIsModalOpen(true);
-  const handleClose = () => setIsModalOpen(false);
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={toggleModal}>
         Add Article
       </Button>
 
-      <Modal show={isModalOpen} onHide={handleClose}>
+      <Modal show={isModalOpen} onHide={toggleModal}>
         <Modal.Header closeButton>
           <Modal.Title>Add Article</Modal.Title>
         </Modal.Header>
@@ -109,7 +110,7 @@ export default function AddArticleModal({ onAddArticle }) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={toggleModal}>
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>

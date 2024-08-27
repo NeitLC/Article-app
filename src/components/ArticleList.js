@@ -42,7 +42,7 @@ export default function ArticleList() {
           <AddArticleModal onAddArticle={handleAddArticle} />
         </Col>
         <Col>
-          <DeleteArticleModal onDeleteArticle={handleDeleteArticle} />
+          <DeleteArticleModal articles={data} onDeleteArticle={handleDeleteArticle} />
         </Col>
       </Row>
     </div>
