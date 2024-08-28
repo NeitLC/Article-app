@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteArticle } from "../redux/articleSlice";
 import { Form, Button, Modal, ListGroup } from "react-bootstrap";
+import { toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function DeleteArticleModal({ articles, onDeleteArticle }) {
   const dispatch = useDispatch();
@@ -16,6 +18,20 @@ export default function DeleteArticleModal({ articles, onDeleteArticle }) {
     }
   };
 
+  const notify = () => {
+    toast.success('Articles Deleted Succsessfully', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+
   const handleSubmit = () => {
     const existingArticles = JSON.parse(localStorage.getItem("articles")) || [];
     const updatedArticles = existingArticles.filter((article) => !selectedArticles.includes(article.id));
@@ -25,6 +41,7 @@ export default function DeleteArticleModal({ articles, onDeleteArticle }) {
     setSelectedArticles([]);
     setIsModalOpen(false);
     onDeleteArticle(updatedArticles);
+    notify();
   };
 
   const handleShow = () => setIsModalOpen(true);
